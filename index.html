@@ -63,7 +63,6 @@ nav.scrolled{background:rgba(2,2,10,0.85);backdrop-filter:blur(20px);border-bott
 .hero-left{flex:1;position:relative;z-index:2}
 .hero-right{width:420px;position:relative;z-index:2;display:flex;justify-content:center;align-items:center}
 
-/* glitch name */
 .hero-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:28px;font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--neon);letter-spacing:0.25em;text-transform:uppercase;opacity:0;animation:fadeSlide 0.8s 0.3s ease forwards}
 .eyebrow-line{width:32px;height:1px;background:var(--neon)}
 
@@ -108,6 +107,7 @@ nav.scrolled{background:rgba(2,2,10,0.85);backdrop-filter:blur(20px);border-bott
 .chip-g{background:rgba(57,255,143,0.1);border:1px solid rgba(57,255,143,0.25);color:var(--neon)}
 .chip-r{background:rgba(255,45,120,0.1);border:1px solid rgba(255,45,120,0.25);color:var(--neon2)}
 .chip-b{background:rgba(77,170,255,0.1);border:1px solid rgba(77,170,255,0.25);color:var(--neon3)}
+.chip-y{background:rgba(255,209,102,0.1);border:1px solid rgba(255,209,102,0.25);color:var(--gold)}
 .hero-scroll{position:absolute;bottom:40px;left:48px;display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeSlide 0.8s 1.5s ease forwards}
 .scroll-line{width:1px;height:60px;background:linear-gradient(to bottom,var(--neon),transparent);animation:scrollPulse 2s ease-in-out infinite}
 @keyframes scrollPulse{0%,100%{opacity:0.3;transform:scaleY(1)}50%{opacity:1;transform:scaleY(1.2)}}
@@ -131,7 +131,6 @@ section.s{padding:120px 48px;position:relative;z-index:1}
 /* ===== SKILLS ===== */
 #skills{background:var(--deep)}
 .skills-layout{display:grid;grid-template-columns:1fr 1fr;gap:6px}
-.sk-row{display:contents}
 .sk-item{background:var(--card);border:1px solid var(--border);padding:28px 32px;position:relative;overflow:hidden;cursor:none;transition:border-color 0.3s}
 .sk-item:hover{border-color:rgba(57,255,143,0.3)}
 .sk-item::before{content:'';position:absolute;inset:0;background:var(--neon);transform:scaleX(0);transform-origin:left;transition:transform 0.4s cubic-bezier(0.77,0,0.175,1);z-index:0;opacity:0.04}
@@ -149,10 +148,18 @@ section.s{padding:120px 48px;position:relative;z-index:1}
 
 /* ===== PROJECTS ===== */
 #projects{background:var(--black)}
+
+/* Filter tabs */
+.proj-filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:40px}
+.filter-btn{font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;padding:8px 18px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:none;transition:all 0.2s;clip-path:polygon(6px 0%,100% 0%,100% calc(100% - 6px),calc(100% - 6px) 100%,0% 100%,0% 6px)}
+.filter-btn.active,.filter-btn:hover{border-color:var(--neon);color:var(--neon);background:rgba(57,255,143,0.06)}
+
 .proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
-.proj-card{position:relative;overflow:hidden;background:var(--card);border:1px solid var(--border);padding:40px 36px;cursor:none;group}
-.proj-card-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(57,255,143,0.05),rgba(77,170,255,0.05));opacity:0;transition:opacity 0.4s;pointer-events:none}
+.proj-card{position:relative;overflow:hidden;background:var(--card);border:1px solid var(--border);padding:40px 36px;cursor:none;transition:border-color 0.3s}
+.proj-card[data-hidden="true"]{display:none}
+.proj-card-overlay{position:absolute;inset:0;background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(57,255,143,0.08),transparent 60%);opacity:0;transition:opacity 0.4s;pointer-events:none}
 .proj-card:hover .proj-card-overlay{opacity:1}
+.proj-card:hover{border-color:rgba(57,255,143,0.2)}
 .proj-num{font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--dim);letter-spacing:0.2em;margin-bottom:28px;display:block}
 .proj-icon-wrap{width:52px;height:52px;background:rgba(57,255,143,0.06);border:1px solid rgba(57,255,143,0.15);display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:24px;position:relative;overflow:hidden;transition:background 0.3s,border-color 0.3s}
 .proj-icon-wrap::after{content:'';position:absolute;inset:0;background:var(--neon);transform:translateY(100%);transition:transform 0.35s cubic-bezier(0.77,0,0.175,1)}
@@ -164,10 +171,16 @@ section.s{padding:120px 48px;position:relative;z-index:1}
 .proj-desc{font-size:0.88rem;color:var(--muted);line-height:1.7;margin-bottom:20px}
 .proj-kpi{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--gold);background:rgba(255,209,102,0.08);border:1px solid rgba(255,209,102,0.2);padding:5px 12px;margin-bottom:20px;letter-spacing:0.08em}
 .proj-stack{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:28px}
+.proj-links{display:flex;gap:16px;align-items:center}
 .proj-link{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:0.68rem;letter-spacing:0.15em;color:var(--muted);text-decoration:none;text-transform:uppercase;transition:color 0.2s;border-bottom:1px solid var(--dim);padding-bottom:4px}
 .proj-link:hover{color:var(--neon);border-color:var(--neon)}
 .proj-arrow{display:inline-block;transition:transform 0.3s}
 .proj-link:hover .proj-arrow{transform:translate(4px,-4px)}
+
+/* Featured project — spans 2 cols */
+.proj-card.featured{grid-column:span 2}
+.proj-card.featured .proj-title{font-size:1.5rem}
+.proj-card.featured .proj-desc{max-width:480px}
 
 /* ===== COMPETITIVE ===== */
 #competitive{background:var(--deep)}
@@ -248,6 +261,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
   #hero{padding:80px 20px 80px;flex-direction:column;gap:48px}
   .hero-right{width:100%}
   .skills-layout,.proj-grid,.comp-layout{grid-template-columns:1fr}
+  .proj-card.featured{grid-column:span 1}
   footer{flex-direction:column;gap:12px;text-align:center}
 }
 </style>
@@ -264,7 +278,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 <!-- CURSOR -->
 <div id="cur"></div>
 <div id="cur-ring"></div>
-<div id="cur-text" id="cur-text"></div>
+<div id="cur-text"></div>
 
 <!-- WebGL BG -->
 <canvas id="bg-canvas"></canvas>
@@ -276,6 +290,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
     <li><a href="#skills">Skills</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#competitive">DSA</a></li>
+    <li><a href="https://leetcode.com/u/SakshamDevloper/" target="_blank">LeetCode ↗</a></li>
     <li><a href="#education">Education</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
@@ -315,7 +330,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           </div>
           <div class="card-stat-row">
             <div class="card-stat"><span class="num">255+</span><span class="lbl">LeetCode</span></div>
-            <div class="card-stat"><span class="num">3+</span><span class="lbl">Projects</span></div>
+            <div class="card-stat"><span class="num">10+</span><span class="lbl">Projects</span></div>
             <div class="card-stat"><span class="num">5+</span><span class="lbl">Stacks</span></div>
           </div>
           <div class="card-chips">
@@ -339,9 +354,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 
 <!-- MARQUEE -->
 <div class="marquee-section">
-  <div class="marquee-track" id="marquee">
-    <!-- filled by JS -->
-  </div>
+  <div class="marquee-track" id="marquee"></div>
 </div>
 
 <!-- SKILLS -->
@@ -359,36 +372,36 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
     <div class="sk-item reveal" data-delay="1">
       <div class="sk-item-content">
         <div class="sk-header"><span class="sk-icon">🧠</span><span class="sk-name">ML / AI</span></div>
-        <div class="sk-tags"><span class="sk-tag">Scikit-learn</span><span class="sk-tag">TensorFlow</span><span class="sk-tag">NLP</span><span class="sk-tag">ARIMA</span><span class="sk-tag">Feature Eng.</span></div>
+        <div class="sk-tags"><span class="sk-tag">Scikit-learn</span><span class="sk-tag">TensorFlow</span><span class="sk-tag">NLP</span><span class="sk-tag">ARIMA</span><span class="sk-tag">XGBoost</span><span class="sk-tag">OpenCV</span></div>
         <div class="sk-progress"><div class="sk-progress-fill" style="--w:80%"></div></div>
       </div>
     </div>
     <div class="sk-item reveal" data-delay="2">
       <div class="sk-item-content">
         <div class="sk-header"><span class="sk-icon">⚡</span><span class="sk-name">Backend</span></div>
-        <div class="sk-tags"><span class="sk-tag">Spring Boot</span><span class="sk-tag">Node.js</span><span class="sk-tag">REST APIs</span><span class="sk-tag">MVC</span></div>
+        <div class="sk-tags"><span class="sk-tag">Spring Boot</span><span class="sk-tag">Node.js</span><span class="sk-tag">Express</span><span class="sk-tag">REST APIs</span><span class="sk-tag">MVC</span></div>
         <div class="sk-progress"><div class="sk-progress-fill" style="--w:85%"></div></div>
       </div>
     </div>
     <div class="sk-item reveal" data-delay="3">
+      <div class="sk-item-content">
+        <div class="sk-header"><span class="sk-icon">🎨</span><span class="sk-name">Frontend</span></div>
+        <div class="sk-tags"><span class="sk-tag">React</span><span class="sk-tag">HTML/CSS</span><span class="sk-tag">JavaScript</span><span class="sk-tag">Responsive</span></div>
+        <div class="sk-progress"><div class="sk-progress-fill" style="--w:75%"></div></div>
+      </div>
+    </div>
+    <div class="sk-item reveal" data-delay="4">
       <div class="sk-item-content">
         <div class="sk-header"><span class="sk-icon">🗄️</span><span class="sk-name">Databases</span></div>
         <div class="sk-tags"><span class="sk-tag">MySQL</span><span class="sk-tag">MongoDB</span><span class="sk-tag">Firebase</span></div>
         <div class="sk-progress"><div class="sk-progress-fill" style="--w:78%"></div></div>
       </div>
     </div>
-    <div class="sk-item reveal" data-delay="4">
-      <div class="sk-item-content">
-        <div class="sk-header"><span class="sk-icon">🔧</span><span class="sk-name">Tools</span></div>
-        <div class="sk-tags"><span class="sk-tag">Git</span><span class="sk-tag">Docker</span><span class="sk-tag">Linux</span><span class="sk-tag">Postman</span></div>
-        <div class="sk-progress"><div class="sk-progress-fill" style="--w:82%"></div></div>
-      </div>
-    </div>
     <div class="sk-item reveal" data-delay="5">
       <div class="sk-item-content">
-        <div class="sk-header"><span class="sk-icon">💡</span><span class="sk-name">CS Core</span></div>
-        <div class="sk-tags"><span class="sk-tag">DSA</span><span class="sk-tag">OOP</span><span class="sk-tag">DBMS</span><span class="sk-tag">OS</span><span class="sk-tag">System Design</span></div>
-        <div class="sk-progress"><div class="sk-progress-fill" style="--w:88%"></div></div>
+        <div class="sk-header"><span class="sk-icon">🔧</span><span class="sk-name">Tools & DevOps</span></div>
+        <div class="sk-tags"><span class="sk-tag">Git</span><span class="sk-tag">Docker</span><span class="sk-tag">Linux</span><span class="sk-tag">Postman</span><span class="sk-tag">VS Code</span></div>
+        <div class="sk-progress"><div class="sk-progress-fill" style="--w:82%"></div></div>
       </div>
     </div>
   </div>
@@ -398,45 +411,207 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 <section class="s" id="projects">
   <div class="s-label"><span class="s-label-num">02</span> — Selected Work</div>
   <h2 class="s-title">Projects</h2>
-  <div class="proj-grid">
 
-    <div class="proj-card reveal" data-delay="0">
+  <!-- Filter tabs -->
+  <div class="proj-filters">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="ai">AI / ML</button>
+    <button class="filter-btn" data-filter="fullstack">Full Stack</button>
+    <button class="filter-btn" data-filter="backend">Backend</button>
+  </div>
+
+  <div class="proj-grid" id="proj-grid">
+
+    <!-- 01 ATHENA — featured -->
+    <div class="proj-card featured reveal" data-delay="0" data-cat="ai">
       <div class="proj-card-overlay"></div>
-      <span class="proj-num">PROJECT_01</span>
-      <div class="proj-icon-wrap"><span>📈</span></div>
-      <div class="proj-title">Sales Forecasting</div>
-      <p class="proj-desc">Time-series forecasting using ARIMA and regression-based ML. Preprocessing + feature engineering on real sales data.</p>
-      <div class="proj-kpi">▲ 12–13% MAPE achieved</div>
+      <span class="proj-num">PROJECT_01 · FEATURED</span>
+      <div class="proj-icon-wrap"><span>🤖</span></div>
+      <div class="proj-title">ATHENA — AI Voice Assistant</div>
+      <p class="proj-desc">AI-powered desktop voice assistant with real-time speech recognition, LLM integration, and full system automation. Opens apps, sets reminders, fetches weather, and responds to natural language commands entirely hands-free.</p>
+      <div class="proj-kpi">◆ LLM + Speech Recognition + System Automation</div>
       <div class="proj-stack">
-        <span class="chip chip-g">Python</span><span class="chip chip-g">ARIMA</span><span class="chip chip-b">Scikit-learn</span><span class="chip chip-b">Pandas</span>
+        <span class="chip chip-g">Python</span>
+        <span class="chip chip-r">NLP</span>
+        <span class="chip chip-b">LLM Integration</span>
+        <span class="chip chip-g">Speech Recognition</span>
+        <span class="chip chip-b">Automation</span>
       </div>
-      <a href="https://github.com/SakshamDevloper" target="_blank" class="proj-link">GitHub <span class="proj-arrow">↗</span></a>
+      <div class="proj-links">
+        <a href="https://github.com/SakshamDevloper/ATHENA-AI-Assistant" target="_blank" class="proj-link">GitHub <span class="proj-arrow">↗</span></a>
+      </div>
     </div>
 
-    <div class="proj-card reveal" data-delay="1">
+    <!-- 02 Voice Task Manager -->
+    <div class="proj-card reveal" data-delay="1" data-cat="fullstack">
       <div class="proj-card-overlay"></div>
       <span class="proj-num">PROJECT_02</span>
-      <div class="proj-icon-wrap"><span>🤖</span></div>
-      <div class="proj-title">AI NLP Assistant</div>
-      <p class="proj-desc">Conversational AI assistant with intent recognition, text preprocessing, and automation workflows built from scratch.</p>
-      <div class="proj-kpi">◆ Intent Recognition Engine</div>
+      <div class="proj-icon-wrap"><span>🎙️</span></div>
+      <div class="proj-title">Voice Task Management</div>
+      <p class="proj-desc">Manage tasks using voice commands with real-time updates, secure auth, and a clean UI. Combines speech processing with a live task board.</p>
+      <div class="proj-kpi">◈ Voice Commands · Real-Time Updates</div>
       <div class="proj-stack">
-        <span class="chip chip-g">Python</span><span class="chip chip-r">NLP</span><span class="chip chip-r">NLTK</span><span class="chip chip-b">Automation</span>
+        <span class="chip chip-b">HTML</span>
+        <span class="chip chip-g">JavaScript</span>
+        <span class="chip chip-r">Web Speech API</span>
+        <span class="chip chip-b">Auth</span>
       </div>
-      <a href="https://github.com/SakshamDevloper" target="_blank" class="proj-link">GitHub <span class="proj-arrow">↗</span></a>
+      <div class="proj-links">
+        <a href="https://github.com/SakshamDevloper/Voice-Enabled-Task-Management-System" target="_blank" class="proj-link">GitHub <span class="proj-arrow">↗</span></a>
+      </div>
     </div>
 
-    <div class="proj-card reveal" data-delay="2">
+    <!-- 03 Brain Tumor Detection -->
+    <div class="proj-card reveal" data-delay="2" data-cat="ai">
       <div class="proj-card-overlay"></div>
       <span class="proj-num">PROJECT_03</span>
-      <div class="proj-icon-wrap"><span>🎓</span></div>
-      <div class="proj-title">Placement Cell App</div>
-      <p class="proj-desc">Full-stack paperless placement management. Secure auth, structured MongoDB integration, clean MVC architecture.</p>
-      <div class="proj-kpi">◈ Full-Stack Web Platform</div>
+      <div class="proj-icon-wrap"><span>🧬</span></div>
+      <div class="proj-title">Brain Tumor Detection</div>
+      <p class="proj-desc">Deep learning model trained on MRI scans to classify tumors vs. normal tissue. Dataset organized into Train/Test folders with binary classification (YES/NO).</p>
+      <div class="proj-kpi">▲ CNN Image Classification · MRI Dataset</div>
       <div class="proj-stack">
-        <span class="chip chip-g">Node.js</span><span class="chip chip-b">MongoDB</span><span class="chip chip-r">REST API</span><span class="chip chip-g">Auth</span>
+        <span class="chip chip-g">Python</span>
+        <span class="chip chip-b">TensorFlow</span>
+        <span class="chip chip-r">OpenCV</span>
+        <span class="chip chip-b">Jupyter</span>
       </div>
-      <a href="https://github.com/SakshamDevloper" target="_blank" class="proj-link">GitHub <span class="proj-arrow">↗</span></a>
+      <div class="proj-links">
+        <a href="https://github.com/SakshamDevloper/Brain-Tumor-Detection" target="_blank" class="proj-link">GitHub <span class="proj-arrow">↗</span></a>
+      </div>
+    </div>
+
+    <!-- 04 Sales Forecasting -->
+    <div class="proj-card reveal" data-delay="3" data-cat="ai">
+      <div class="proj-card-overlay"></div>
+      <span class="proj-num">PROJECT_04</span>
+      <div class="proj-icon-wrap"><span>📈</span></div>
+      <div class="proj-title">Sales Forecasting × ML</div>
+      <p class="proj-desc">End-to-end retail sales forecasting using ARIMA and XGBoost. Feature-engineered time-series modeling on Amazon dataset with thorough preprocessing pipeline.</p>
+      <div class="proj-kpi">▲ 13% MAPE on Amazon Dataset</div>
+      <div class="proj-stack">
+        <span class="chip chip-g">Python</span>
+        <span class="chip chip-g">ARIMA</span>
+        <span class="chip chip-b">XGBoost</span>
+        <span class="chip chip-b">Pandas</span>
+        <span class="chip chip-r">Scikit-learn</span>
+      </div>
+      <div class="proj-links">
+        <a href="https://github.com/SakshamDevloper/Sales-Forecasting-x-ML" target="_blank" class="proj-link">GitHub <span class="proj-arrow">↗</span></a>
+      </div>
+    </div>
+
+    <!-- 05 Placement Cell -->
+    <div class="proj-card reveal" data-delay="4" data-cat="fullstack">
+      <div class="proj-card-overlay"></div>
+      <span class="proj-num">PROJECT_05</span>
+      <div class="proj-icon-wrap"><span>🎓</span></div>
+      <div class="proj-title">Paperless Placement Cell</div>
+      <p class="proj-desc">Full-stack web platform to digitize campus placement operations. Secure JWT auth, structured MongoDB integration, and clean MVC architecture — eliminating paper-based processes entirely.</p>
+      <div class="proj-kpi">◈ Full-Stack · JWT · MongoDB</div>
+      <div class="proj-stack">
+        <span class="chip chip-g">Node.js</span>
+        <span class="chip chip-b">MongoDB</span>
+        <span class="chip chip-g">JavaScript</span>
+        <span class="chip chip-r">JWT Auth</span>
+      </div>
+      <div class="proj-links">
+        <a href="https://github.com/SakshamDevloper/Paperless-Placement-cell" target="_blank" class="proj-link">GitHub <span class="proj-arrow">↗</span></a>
+      </div>
+    </div>
+
+    <!-- 06 Full Stack Ecommerce -->
+    <div class="proj-card reveal" data-delay="5" data-cat="fullstack">
+      <div class="proj-card-overlay"></div>
+      <span class="proj-num">PROJECT_06</span>
+      <div class="proj-icon-wrap"><span>🛒</span></div>
+      <div class="proj-title">Full-Stack E-Commerce</div>
+      <p class="proj-desc">Feature-complete online store with product catalog, cart management, user authentication, and order processing. Built with the MERN stack and REST API backend.</p>
+      <div class="proj-kpi">◈ MERN Stack · Cart · Orders</div>
+      <div class="proj-stack">
+        <span class="chip chip-g">Node.js</span>
+        <span class="chip chip-b">MongoDB</span>
+        <span class="chip chip-r">React</span>
+        <span class="chip chip-g">Express</span>
+      </div>
+      <div class="proj-links">
+        <a href="https://github.com/SakshamDevloper/Full-Stack-Ecommerce-Store-ma" target="_blank" class="proj-link">GitHub <span class="proj-arrow">↗</span></a>
+      </div>
+    </div>
+
+    <!-- 07 Health Record Backend -->
+    <div class="proj-card reveal" data-delay="0" data-cat="backend">
+      <div class="proj-card-overlay"></div>
+      <span class="proj-num">PROJECT_07</span>
+      <div class="proj-icon-wrap"><span>🏥</span></div>
+      <div class="proj-title">Health Record Backend</div>
+      <p class="proj-desc">Secure RESTful backend for managing electronic health records. Implements role-based access control, encrypted patient data, and a clean layered architecture.</p>
+      <div class="proj-kpi">◆ RBAC · Encrypted Records · REST</div>
+      <div class="proj-stack">
+        <span class="chip chip-b">Spring Boot</span>
+        <span class="chip chip-g">Java</span>
+        <span class="chip chip-b">MySQL</span>
+        <span class="chip chip-r">REST API</span>
+      </div>
+      <div class="proj-links">
+        <a href="https://github.com/SakshamDevloper/Health-Record-Backend-main" target="_blank" class="proj-link">GitHub <span class="proj-arrow">↗</span></a>
+      </div>
+    </div>
+
+    <!-- 08 Social Media App -->
+    <div class="proj-card reveal" data-delay="1" data-cat="fullstack">
+      <div class="proj-card-overlay"></div>
+      <span class="proj-num">PROJECT_08</span>
+      <div class="proj-icon-wrap"><span>📱</span></div>
+      <div class="proj-title">Social Media Web App</div>
+      <p class="proj-desc">Full-stack social platform with user profiles, posts, follow system, and real-time-style feed updates. Clean UI with secure authentication and MongoDB storage.</p>
+      <div class="proj-kpi">◈ Posts · Follow System · Feed</div>
+      <div class="proj-stack">
+        <span class="chip chip-g">Node.js</span>
+        <span class="chip chip-b">MongoDB</span>
+        <span class="chip chip-g">JavaScript</span>
+        <span class="chip chip-r">Auth</span>
+      </div>
+      <div class="proj-links">
+        <a href="https://github.com/SakshamDevloper/Social-Media-Web-Application-m" target="_blank" class="proj-link">GitHub <span class="proj-arrow">↗</span></a>
+      </div>
+    </div>
+
+    <!-- 09 Food Delivery -->
+    <div class="proj-card reveal" data-delay="2" data-cat="fullstack">
+      <div class="proj-card-overlay"></div>
+      <span class="proj-num">PROJECT_09</span>
+      <div class="proj-icon-wrap"><span>🍕</span></div>
+      <div class="proj-title">Food Delivery Platform</div>
+      <p class="proj-desc">Single-vendor food delivery web app with menu browsing, cart, order placement, and delivery status tracking. Responsive frontend with a Node.js/MongoDB backend.</p>
+      <div class="proj-kpi">◈ Cart · Order Tracking · Single Vendor</div>
+      <div class="proj-stack">
+        <span class="chip chip-g">Node.js</span>
+        <span class="chip chip-b">MongoDB</span>
+        <span class="chip chip-g">JavaScript</span>
+        <span class="chip chip-r">REST API</span>
+      </div>
+      <div class="proj-links">
+        <a href="https://github.com/SakshamDevloper/food-delivery-singlevendor-main" target="_blank" class="proj-link">GitHub <span class="proj-arrow">↗</span></a>
+      </div>
+    </div>
+
+    <!-- 10 Quiz App -->
+    <div class="proj-card reveal" data-delay="3" data-cat="fullstack">
+      <div class="proj-card-overlay"></div>
+      <span class="proj-num">PROJECT_10</span>
+      <div class="proj-icon-wrap"><span>🧩</span></div>
+      <div class="proj-title">Quiz Application</div>
+      <p class="proj-desc">Interactive quiz platform with dynamic question loading, timed rounds, score tracking, and leaderboard. Supports multiple categories and difficulty levels.</p>
+      <div class="proj-kpi">◈ Dynamic Questions · Score Tracking · Timer</div>
+      <div class="proj-stack">
+        <span class="chip chip-g">JavaScript</span>
+        <span class="chip chip-b">Node.js</span>
+        <span class="chip chip-b">MongoDB</span>
+        <span class="chip chip-r">REST API</span>
+      </div>
+      <div class="proj-links">
+        <a href="https://github.com/SakshamDevloper/QuizApp-master" target="_blank" class="proj-link">GitHub <span class="proj-arrow">↗</span></a>
+      </div>
     </div>
 
   </div>
@@ -451,6 +626,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       <div class="lc-badge">⚡ LeetCode</div>
       <div class="lc-number"><span>255</span>+</div>
       <div class="lc-sub">Problems Solved</div>
+      <a href="https://leetcode.com/u/SakshamDevloper/" target="_blank" style="display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:0.68rem;letter-spacing:0.15em;color:#ffa500;text-decoration:none;text-transform:uppercase;border-bottom:1px solid rgba(255,165,0,0.3);padding-bottom:4px;margin-bottom:32px;transition:border-color 0.2s" onmouseover="this.style.borderColor='#ffa500'" onmouseout="this.style.borderColor='rgba(255,165,0,0.3)'">View LeetCode Profile ↗</a>
       <div class="diff-bars">
         <div class="diff-row">
           <span class="diff-label" style="color:var(--neon)">Easy</span>
@@ -527,6 +703,9 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       <a href="https://github.com/SakshamDevloper" target="_blank" class="c-link">
         <div class="c-link-content"><span>⚡</span> GitHub</div>
       </a>
+      <a href="https://leetcode.com/u/SakshamDevloper/" target="_blank" class="c-link">
+        <div class="c-link-content"><span>🧩</span> LeetCode</div>
+      </a>
     </div>
   </div>
 </section>
@@ -536,7 +715,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
   <div class="footer-info">© 2025 · Built with ambition · Jammu, India</div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* ===== LOADER ===== */
 const loaderName = document.getElementById('loader-name');
 const loaderBar = document.getElementById('loader-bar');
@@ -585,7 +764,7 @@ document.querySelectorAll('a,button').forEach(el=>{
   });
 });
 
-/* ===== WEBGL BG — SHADER ===== */
+/* ===== WEBGL BG ===== */
 const bgCanvas = document.getElementById('bg-canvas');
 const gl = bgCanvas.getContext('webgl2') || bgCanvas.getContext('webgl');
 function resizeBg(){bgCanvas.width=window.innerWidth;bgCanvas.height=window.innerHeight;}
@@ -629,10 +808,8 @@ if(gl){
   const uTime=gl.getUniformLocation(prog,'u_time');
   const uRes=gl.getUniformLocation(prog,'u_res');
   const uMouse=gl.getUniformLocation(prog,'u_mouse');
-  let mx2=window.innerWidth/2,my2=window.innerHeight/2;
-  let tmx=mx2,tmy=my2;
+  let mx2=window.innerWidth/2,my2=window.innerHeight/2,tmx=mx2,tmy=my2,t=0;
   document.addEventListener('mousemove',e=>{tmx=e.clientX;tmy=e.clientY;});
-  let t=0;
   (function frame(){
     t+=0.008;
     mx2+=(tmx-mx2)*0.05;my2+=(tmy-my2)*0.05;
@@ -646,14 +823,14 @@ if(gl){
 }
 
 /* ===== MARQUEE ===== */
-const items=['Python','Machine Learning','NLP','Deep Learning','Spring Boot','Node.js','MongoDB','Docker','DSA','ARIMA','TensorFlow','REST APIs','System Design','Git','Linux'];
+const items=['Python','Machine Learning','NLP','Deep Learning','Spring Boot','Node.js','MongoDB','Docker','DSA','ARIMA','XGBoost','TensorFlow','React','REST APIs','System Design','Git','Linux','OpenCV'];
 const track=document.getElementById('marquee');
 let html='';
 for(let j=0;j<2;j++){items.forEach(it=>{html+=`<div class="marquee-item"><span>◆</span>${it}</div>`;});}
 track.innerHTML=html;
 
 /* ===== TYPED ===== */
-const roles=['AI/ML Engineer','Python Developer','NLP Specialist','Backend Engineer','DSA Problem Solver'];
+const roles=['AI/ML Engineer','Python Developer','NLP Specialist','Backend Engineer','Full-Stack Builder','DSA Problem Solver'];
 let ri=0,ci=0,del=false;
 const typedEl=document.getElementById('typed');
 function type(){
@@ -662,7 +839,6 @@ function type(){
   else{typedEl.textContent=w.slice(0,--ci);if(ci===0){del=false;ri=(ri+1)%roles.length;setTimeout(type,400);return;}setTimeout(type,45);}
 }
 type();
-document.getElementById('caret').style.animation='blink 0.8s infinite';
 
 /* ===== 3D TILT CARD ===== */
 const wrap=document.getElementById('card3d-wrap');
@@ -673,10 +849,9 @@ if(wrap){
     const r=wrap.getBoundingClientRect();
     const x=(e.clientX-r.left)/r.width;
     const y=(e.clientY-r.top)/r.height;
-    const rx=(y-0.5)*20;
-    const ry=(x-0.5)*-20;
-    card.style.transform=`rotateX(${rx}deg) rotateY(${ry}deg) scale3d(1.03,1.03,1.03)`;
-    shine.style.setProperty('--x',x*100+'%');shine.style.setProperty('--y',y*100+'%');
+    card.style.transform=`rotateX(${(y-0.5)*20}deg) rotateY(${(x-0.5)*-20}deg) scale3d(1.03,1.03,1.03)`;
+    shine.style.setProperty('--x',x*100+'%');
+    shine.style.setProperty('--y',y*100+'%');
     shine.style.opacity='1';
   });
   wrap.addEventListener('mouseleave',()=>{
@@ -684,6 +859,27 @@ if(wrap){
     shine.style.opacity='0';
   });
 }
+
+/* ===== PROJECT FILTER ===== */
+document.querySelectorAll('.filter-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const f=btn.dataset.filter;
+    document.querySelectorAll('.proj-card').forEach(card=>{
+      const cat=card.dataset.cat;
+      const show = f==='all' || cat===f;
+      card.style.display = show ? '' : 'none';
+    });
+    // reflow featured on filter
+    const grid=document.getElementById('proj-grid');
+    const visible=[...grid.querySelectorAll('.proj-card')].filter(c=>c.style.display!=='none');
+    visible.forEach((c,i)=>{
+      if(i===0 && f==='all') c.classList.add('featured');
+      else c.classList.remove('featured');
+    });
+  });
+});
 
 /* ===== SCROLL ===== */
 window.addEventListener('scroll',()=>{
@@ -711,7 +907,6 @@ document.querySelectorAll('.sk-item').forEach(el=>skObs.observe(el));
 /* EDU */
 const eduObs=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting){
-    e.target.classList.add('inview');
     document.getElementById('edu-vline').classList.add('inview');
     document.querySelectorAll('.edu-item').forEach((el,i)=>{setTimeout(()=>el.classList.add('inview'),i*200);});
   }});
@@ -735,13 +930,4 @@ document.querySelectorAll('.proj-card').forEach(card=>{
   card.addEventListener('mousemove',e=>{
     const r=card.getBoundingClientRect();
     card.style.setProperty('--mx',((e.clientX-r.left)/r.width*100)+'%');
-    card.style.setProperty('--my',((e.clientY-r.top)/r.height*100)+'%');
-  });
-});
-</script>
-<style>
-@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
-.proj-card .proj-card-overlay{background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(57,255,143,0.08),transparent 60%)}
-</style>
-</body>
-</html>
+    card.style.setPro

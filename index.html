@@ -251,10 +251,27 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 </head>
 <body>
 
-<!-- BACKGROUND MUSIC — Dracula by Jennie, loops silently -->
-<audio id="bg-music" loop preload="auto">
-  <source src="https://sakshamdevloper.github.io/dracula-jennie.mp3">
+<!-- BACKGROUND MUSIC -->
+<audio id="bg-music" loop>
+  <source src="dracula-jennie.mp3" type="audio/mpeg">
 </audio>
+
+<!-- MUSIC BUTTON -->
+<button id="music-btn" onclick="toggleMusic()" style="
+position:fixed;
+bottom:20px;
+right:20px;
+z-index:9999;
+background:rgba(0,0,0,0.6);
+color:#39ff8f;
+border:1px solid #39ff8f;
+padding:10px 16px;
+font-family:monospace;
+cursor:pointer;
+backdrop-filter:blur(10px);
+">
+  Play Music
+</button>
   
 <!-- LOADER -->
 <div id="loader">
@@ -714,19 +731,33 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
   }, 80);
 })();
 
-// ===== BACKGROUND MUSIC — autoplay on first interaction =====
-(function(){
-  const audio = document.getElementById('bg-music');
-  // Try autoplay immediately
-  audio.volume = 0.35;
-  const tryPlay = () => audio.play().catch(()=>{});
-  tryPlay();
-  // Fallback: play on first user interaction if autoplay blocked
-  const unlock = () => { tryPlay(); document.removeEventListener('click', unlock); document.removeEventListener('keydown', unlock); document.removeEventListener('touchstart', unlock); };
-  document.addEventListener('click', unlock);
-  document.addEventListener('keydown', unlock);
-  document.addEventListener('touchstart', unlock);
-})();
+// ===== MUSIC CONTROL (FIXED) =====
+const audio = document.getElementById("bg-music");
+const btn = document.getElementById("music-btn");
+
+audio.volume = 0.3;
+
+// Auto attempt (will fail silently if blocked)
+audio.play().catch(() => {
+    // Wait for user interaction
+    document.addEventListener("click", startMusicOnce);
+});
+
+function startMusicOnce() {
+    audio.play().catch(()=>{});
+    btn.innerText = "🔊 Pause Music";
+    document.removeEventListener("click", startMusicOnce);
+}
+
+function toggleMusic() {
+    if (audio.paused) {
+        audio.play();
+        btn.innerText = "🔊 Pause Music";
+    } else {
+        audio.pause();
+        btn.innerText = "🔇 Play Music";
+    }
+}
 
 // ===== CURSOR =====
 const cur = document.getElementById('cur');
